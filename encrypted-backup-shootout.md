@@ -199,7 +199,7 @@ Tar with incremental backups does not easily support pruning of old backups, so 
 |restic forget && restic prune|2.030 s|
 </details>
 
-The bupstash garbage collector is very fast compared to borg and restic, as the author I can say I took special care to optimize this part of bupstash so am quite happy with this result.
+The bupstash garbage collector is very fast compared to borg and restic, as the creator of bupstash I can say I took special care to optimize this part of bupstash so am quite happy with this result.
 
 ## Pruning an old backup on a remote server
 
