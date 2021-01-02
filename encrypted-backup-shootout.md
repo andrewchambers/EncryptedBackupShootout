@@ -36,7 +36,7 @@ The directory we are snapshotting is 1.1 GB comprised of 74725 files and directo
 
 The snapshots are all made to tmpfs so hopefully does not measure delays introduced by the network or disk activity.
 
-![fresh snapshot durations](./Time_for_1.1_GB_Snapshot.svg)
+![plot](./Time_for_1.1_GB_Snapshot.svg)
 
 <details>
 <summary>Raw data (Click to expand)</summary>
@@ -61,6 +61,7 @@ At the time of benchmarking my connection to the remote server can be summarized
 - client -> client 2.5MiB/s
 - ping 32 milliseconds
 
+![plot](./Time_for_1.1_GB_Remote_Snapshot.svg)
 
 <details>
 <summary>Raw data (Click to expand)</summary>
@@ -80,6 +81,8 @@ Plain tar takes the win again, Restic performs poorly here, it has a far more la
 
 This benchmark is the same as the fresh local snapshot benchmark, except now we measure the time for an incremental snapshot using the builtin caching mechanism of the tools. What this means is each tool keeps a record of what files it has already sent, and is able to
 skip doing that work again.
+
+![plot](Time_for_Incremental_Snapshot.svg)
 
 <details>
 <summary>Raw data (Click to expand)</summary>
@@ -101,6 +104,8 @@ It is also interesting to me that 'bupstash put' is an order of magnitude faster
 This benchmark is the same as the incremental local snapshot benchmark except the files are sent to a remote server hosted on google cloud via ssh.
 
 Benchmark conditions are the same as the fresh remote snapshot benchmark.
+
+![plot](Time_for_Remote_Incremental_Snapshot.svg)
 
 <details>
 <summary>Raw data (Click to expand)</summary>
