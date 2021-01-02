@@ -115,7 +115,7 @@ skip doing that work again.
 |borg create|7.724 s|
 </details>
 
-Incremental tar is the clear winner here. Why are the other tools slower? I think this is mainly because the other tools present each snapshot to the user as a full backup and thus do extra work to spare the end user from managing incremental backups manually.
+Incremental tar is the clear winner here, but why are the other tools slower? I think this is mainly because the other tools present each snapshot to the user as a full backup and thus do extra work to spare the end user from managing incremental backups manually.
 
 It is also interesting to me that 'bupstash put' is an order of magnitude faster than the other similar tools, though I currently can not explain clearly why that may be the case.
 
