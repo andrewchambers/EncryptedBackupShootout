@@ -27,6 +27,26 @@ The test machine has an AMD Ryzen Threadripper 1950X 16-Core Processor with 16 G
 
 The scripts I used for my benchmarking can be found [here](https://github.com/andrewchambers/EncryptedBackupShootout), though they will definitely need tweaking for your environment.
 
+## Deduplication and compression
+
+For this benchmark we take 20 different consecutive versions of the linux kernel source code and add them all to the same directory, we then create a backup and measure the size of the resulting backup.
+
+The linux kernel versions chosen for this test are all the consecutive git commits preceeding version 5.9, with the resulting directory containing 21 GB of uncompressed files.
+
+
+![plot](Test_Snapshot_Size.svg)
+
+|Command|Size|Compression Ratio|
+|---|---|---|
+|bupstash|0.378 GB|55x|
+|borg|0.476 GB|49x|
+|restic|1.5 GB|14x|
+| tar + gzip + gpg| 3.6 GB|5.8x|
+
+This benchmark shows the advantage the more sophisticated tools have over plain tarballs, They all have extremely good compression ratios when similar data is added multiple times to
+a backup repository.
+
+
 ## Creating a fresh directory snapshot
 
 For this benchmark we are snapshotting a copy of the linux 
@@ -198,26 +218,6 @@ In this benchmark we will be removing an old snapshot from the backup repository
 </details>
 
 Once again restic suffers the worst from introduced network latency of all the tools.
-
-## Deduplication and compression
-
-For this benchmark we take 20 different consecutive versions of the linux kernel source code and add them all to the same directory, we then create a backup and measure the size of the resulting backup.
-
-The linux kernel versions chosen for this test are all the consecutive git commits preceeding version 5.9, with the resulting directory containing 21GB of uncompressed files.
-
-
-![plot](Test_Snapshot_Size.svg)
-
-|Command|Size|Compression Ratio|
-|---|---|---|
-|bupstash|0.378 GB|55x|
-|borg|0.476 GB|49x|
-|restic|1.5 GB|14x|
-| tar + gzip + gpg| 3.6 GB|5.8x|
-
-This benchmark shows the advantage the more sophisticated tools have over plain tarballs, They all have extremely good compression ratios when similar data is added multiple times to
-a backup repository.
-
 
 ## Approximate peak client side ram usage
 
