@@ -225,12 +225,16 @@ For this benchmark we repeat the fresh snapshot benchmark, but measure the peak 
 
 ![plot](Test_Peak_Memory_Usage.svg)
 
+<details>
+<summary>Raw data (Click to expand)</summary>
+
 |Command|Peak Memory Usage|
 |---|---|
 |tar + gzip + GPG|10.312 MB|
 |bupstash|18.192 MB|
 |borg|96.696 MB|
 |restic|191.252 MB|
+</details>
 
 Bupstash was very memory efficient compared to restic and borg, but ultimately loses out to the simplicity of tar + gzip + GPG.
 
