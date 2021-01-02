@@ -29,7 +29,7 @@ The scripts I used for my benchmarking can be found [here](https://github.com/an
 
 ## Deduplication and compression
 
-For this benchmark we take 20 different consecutive versions of the linux kernel source code and add them all to the same directory, we then create a backup and measure the size of the resulting backup.
+For this benchmark we take 20 different consecutive versions of the linux kernel source code and add them all to the same directory, we then create a snapshot and measure the size of the resulting tarball/repository.
 
 The linux kernel versions chosen for this test are all the consecutive git commits preceeding version 5.9, with the resulting directory containing 21 GB of uncompressed files.
 
