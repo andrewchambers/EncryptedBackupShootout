@@ -1,6 +1,6 @@
 # Encrypted Backup Shootout
 
-Recently I have been spending time on improving the performance of [bupstash](https://github.com/andrewchambers/bupstash) (my encrypted backup tool), and wanted to compare it to some existing tools to try and find it's relative performance in the backup tool landscape.
+Recently I have been spending time on improving the performance of [bupstash](https://github.com/andrewchambers/bupstash) (my encrypted backup tool), and wanted to compare it to some existing tools to try and find its relative performance in the backup tool landscape.
 
 This post compares [bupstash](https://github.com/andrewchambers/bupstash), [restic](https://restic.net/), [borg backup](https://www.borgbackup.org/) and plain old tar + gzip + GPG across a series of simple benchmarks.
 
@@ -23,7 +23,7 @@ For these tests we are using the following versions of the given software:
 - Borg 1.1.14
 - Restic 0.11.0
 
-The test machine has an AMD Ryzen Threadripper 1950X 16-Core Processor with 16 GB of ram, and and nvme SSD hard drive. It is probably best to simply compare results relatively, as reproducing my test environment exactly would be difficult.
+The test machine has an AMD Ryzen Threadripper 1950X 16-Core Processor with 16 GB of ram, and an NVMe SSD hard drive. It is probably best to simply compare results relatively, as reproducing my test environment exactly would be difficult.
 
 The scripts I used for my benchmarking can be found [here](https://github.com/andrewchambers/EncryptedBackupShootout), though they will definitely need tweaking for your environment.
 
@@ -43,14 +43,12 @@ The linux kernel versions chosen for this test are all the consecutive git commi
 |restic|1.5 GB|14x|
 | tar + gzip + gpg| 3.6 GB|5.8x|
 
-This benchmark shows the advantage the more sophisticated tools have over plain tarballs, They all have extremely good compression ratios when similar data is added multiple times to
-a backup repository.
+This benchmark shows the advantage the more sophisticated tools have over plain tarballs, They all have extremely good compression ratios when similar data is added multiple times to a backup repository.
 
 
 ## Creating a fresh directory snapshot
 
-For this benchmark we are snapshotting a copy of the linux 
-5.9.8 source code.
+For this benchmark we are snapshotting a copy of the linux 5.9.8 source code.
 
 The directory we are snapshotting is 1.1 GB comprised of 74725 files and directories.
 
@@ -95,7 +93,7 @@ At the time of benchmarking my connection to the remote server can be summarized
 </details>
 
 
-Plain tar takes the win again, Restic performs poorly here, it has a far more latency sensitive upload protocol.
+Plain tar takes the win again, Restic performs poorly here, it has a far more latency-sensitive upload protocol.
 
 ## Creating an incremental directory snapshot
 
@@ -117,7 +115,7 @@ skip doing that work again.
 
 Incremental tar is the clear winner here, but why are the other tools slower? I think this is mainly because the other tools present each snapshot to the user as a full backup and thus do extra work to spare the end user from managing incremental backups manually.
 
-It is also interesting to me that 'bupstash put' is an order of magnitude faster than the other similar tools, though I currently can not explain clearly why that may be the case.
+It is also interesting to me that `bupstash put` is an order of magnitude faster than the other similar tools, though I currently can not explain clearly why that may be the case.
 
 ## Sending an incremental snapshot to a remote server
 
@@ -161,8 +159,7 @@ Bupstash is the winner for restoring backups.
 
 ## Restoring a snapshot from a remote server
 
-In this benchmark we will restore the snapshot made in the fresh remote snapshot benchmark to tmpfs. The main difference from the previous benchmark is the introduction of
-an internet connection between the backup repository and restore point.
+In this benchmark we will restore the snapshot made in the fresh remote snapshot benchmark to tmpfs. The main difference from the previous benchmark is the introduction of an internet connection between the backup repository and restore point.
 
 Network conditions are the same as the fresh network snapshot benchmark.
 
@@ -221,7 +218,7 @@ Once again restic suffers the worst from introduced network latency of all the t
 
 ## Approximate peak client side ram usage
 
-For this benchmark we repeat the fresh snapshot benchmark, but measure the peak client ram usage (RSS) as reported by the 'time'. For tar we approximate this by summing the peak memory usage across tar, gpg and gzip.
+For this benchmark we repeat the fresh snapshot benchmark, but measure the peak client ram usage (RSS) as reported by the `time` command. For tar we approximate this by summing the peak memory usage across tar, gpg and gzip.
 
 ![plot](Test_Peak_Memory_Usage.svg)
 
@@ -236,15 +233,13 @@ For this benchmark we repeat the fresh snapshot benchmark, but measure the peak 
 |restic|191.252 MB|
 </details>
 
-Bupstash was very memory efficient compared to restic and borg, but ultimately loses out to the simplicity of tar + gzip + GPG.
+Bupstash was very memory-efficient compared to restic and borg, but ultimately loses out to the simplicity of tar + gzip + GPG.
 
 # Conclusions and discussion
 
-GNU Tar + gzip + gpg is an excellent encrypted backup option and performed better than I expected. I think tar and gpg is still a great choice for users who prefer to DIY their own backup scripts. With this in mind, we must ask what are the problems with tar that the other tools address? My opinion is that managing
-incremental backups, deduplication, pruning, and searching backups are far more difficult when using incremental tar compared to borg/restic/bupstash. With incremental tar, it quickly becomes quite hard to track which incremental
-tarballs depend on eachother and you often need to periodically do full snapshots - losing most of the speed benefits.
+GNU Tar + gzip + gpg is an excellent encrypted backup option and performed better than I expected. I think tar and gpg is still a great choice for users who prefer to DIY their own backup scripts. With this in mind, we must ask what are the problems with tar that the other tools address? My opinion is that managing incremental backups, deduplication, pruning, and searching backups are far more difficult when using incremental tar compared to borg/restic/bupstash. With incremental tar, it quickly becomes quite hard to track which incremental tarballs depend on each other and you often need to periodically do full snapshots - losing most of the speed benefits.
 
-As the biased author of bupstash, I am also pleased with how it has performed and hope I can push it further in the future. Restic, while fast at local operation, seems to trail the other tools when network latency is thrown into the mix. Borg is an all around great tool and performed better than I expected.
+As the biased author of bupstash, I am also pleased with how it has performed and hope I can push it further in the future. Restic, while fast at local operation, seems to trail the other tools when network latency is thrown into the mix. Borg is an all-around great tool and performed better than I expected.
 
 In conclusion, I can see strengths, weaknesses and room for improvement in all the tools tested, and encourage everyone to give them a try for yourself.
 
