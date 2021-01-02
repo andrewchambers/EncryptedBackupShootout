@@ -36,7 +36,7 @@ The directory we are snapshotting is 1.1 GB comprised of 74725 files and directo
 
 The snapshots are all made to tmpfs so hopefully does not measure delays introduced by the network or disk activity.
 
-![fresh snapshot durations](./Time%20for%201.1%20GB%20Snapshot%20%28Smaller%20is%20better%29.svg)
+![fresh snapshot durations](./Time_for_1.1_GB_Snapshot.svg)
 
 <details>
 <summary>Raw data (Click to expand)</summary>
