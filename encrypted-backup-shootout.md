@@ -124,6 +124,8 @@ These results match closely with the local incremental snapshots.
 
 In this benchmark we will restore the snapshot made in the fresh local snapshot benchmark to tmpfs.
 
+![plot](Time_for_1.1GB_Restore.svg)
+
 <details>
 <summary>Raw data (Click to expand)</summary>
 
@@ -144,6 +146,8 @@ an internet connection between the backup repository and restore point.
 
 Network conditions are the same as the fresh network snapshot benchmark.
 
+![plot](Time_for_Remote_1.1GB_Restore.svg)
+
 <details>
 <summary>Raw data (Click to expand)</summary>
 
@@ -163,6 +167,8 @@ In this benchmark we will be removing an old snapshot from the backup repository
 
 Tar with incremental backups does not easily support pruning of old backups, so does not participate in this benchmark.
 
+![plot](Time_for_Snapshot_Removal.svg)
+
 <details>
 <summary>Raw data (Click to expand)</summary>
 
@@ -178,6 +184,8 @@ The bupstash garbage collector is very fast compared to borg and restic, as the 
 ## Pruning an old backup on a remote server
 
 In this benchmark we will be removing an old snapshot from the backup repository stored on a remote server. The remote server is the same as the one used in fresh remote snapshot benchmark, and the test data is the same as the local prune bench mark.
+
+![plot](Time_for_Remote_Snapshot_Removal.svg)
 
 <details>
 <summary>Raw data (Click to expand)</summary>
@@ -197,7 +205,8 @@ For this benchmark we take 20 different consecutive versions of the linux kernel
 
 The linux kernel versions chosen for this test are all the consecutive git commits preceeding version 5.9, with the resulting directory containing 21GB of uncompressed files.
 
-Results:
+
+![plot](Test_Snapshot_Size.svg)
 
 |Command|Size|Compression Ratio|
 |---|---|---|
@@ -214,7 +223,7 @@ a backup repository.
 
 For this benchmark we repeat the fresh snapshot benchmark, but measure the peak client ram usage (RSS) as reported by the 'time'. For tar we approximate this by summing the peak memory usage across tar, gpg and gzip.
 
-Results:
+![plot](Test_Peak_Memory_Usage.svg)
 
 |Command|Peak Memory Usage|
 |---|---|
