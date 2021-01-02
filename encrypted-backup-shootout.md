@@ -179,7 +179,7 @@ Network conditions are the same as the fresh network snapshot benchmark.
 |restic restore|146.098 s|
 </details>
 
-Interestingly, the introduction of the network pushed tar ahead of bupstash for backup restoration - this is something I am very interesting in investigating further.
+Interestingly, the introduction of the network pushed tar ahead of bupstash for backup restoration - this is something I am very interested in investigating further.
 
 ## Pruning an old backup
 
